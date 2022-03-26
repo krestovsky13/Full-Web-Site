@@ -89,7 +89,7 @@ class MainView(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'myblog/home.html', context={'page_obj': page_obj})
+        return render(request, 'myblog/index.html', context={'page_obj': page_obj})
 
 
 class PostDetailView(View):
@@ -143,4 +143,4 @@ class TagView(View):
 #             im.append(f['urlToImage'])
 #             mylist = zip(nws, dsc, im)
 #
-#         return render(request, 'myblog/home.html', context={"mylist": mylist})
+#         return render(request, 'myblog/index.html', context={"mylist": mylist})
