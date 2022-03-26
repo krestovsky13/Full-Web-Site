@@ -1,0 +1,40 @@
+{% extends 'myblog/base.html' %}
+{% load static %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block header %}
+    {% include 'myblog/block/header.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb" class="mt-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ post.h1 }}</li>
+                    </ol>
+                </nav>
+                <img class="img-fluid rounded " src="{{ post.image.url }}" alt="">
+                <hr>
+                <p class="lead">
+                    {{ post.content|safe }}
+                </p>
+                <div class="d-flex justify-content-end">
+                    {% for tag in post.tag.all %}
+                        <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                <hr>
+                <p class="lead text-right">Автор: {{ post.author }}</p>
+                <hr>
+                <p class="text-right">Опубликовано {{ post.created_at }}</p>
+                <hr>
+                {% include 'myblog/block/comments.html' %}
+            </div>
+            {% include 'myblog/block/aside.html' %}
+        </div>
+    </div>
+
+{% endblock %}
